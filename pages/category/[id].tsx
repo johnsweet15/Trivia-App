@@ -16,17 +16,17 @@ const Category: NextPage = () => {
 
   const [questions, setQuestions] = useState<Array<Question>>([]);
 
-  useEffect(() => {
-    if (id) {
-      getTriviaQuestions();
-    }
-  }, [id]);
-
   const getTriviaQuestions = async () => {
     const [response] = await getQuestions(id);
     const questions = response?.data?.results || [];
     setQuestions(questions);
   };
+
+  useEffect(() => {
+    if (id) {
+      getTriviaQuestions();
+    }
+  }, [id, getTriviaQuestions]);
 
   return (
     <div>
@@ -36,8 +36,8 @@ const Category: NextPage = () => {
           <Button>Home</Button>
         </Link>
         <h1>{name}</h1>
-        {questions.map((question) => (
-          <QuestionComp question={question} />
+        {questions.map((question, index) => (
+          <QuestionComp key={index} question={question} />
         ))}
       </main>
     </div>

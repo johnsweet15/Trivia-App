@@ -26,8 +26,8 @@ const Question = (props: propTypes) => {
     <div>
       <Card>
         <p>{decode(question.question)}</p>
-        {answers.map((answer) => {
-          return <li>{decode(answer)}</li>;
+        {answers.map((answer, index) => {
+          return <li key={index}>{decode(answer)}</li>;
         })}
         <Button
           onClick={() => setShowAnswer(!showAnswer)}
