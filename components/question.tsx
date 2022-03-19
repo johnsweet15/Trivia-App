@@ -19,7 +19,6 @@ const Question = (props: propTypes) => {
     answers.push(question.correct_answer);
     setAnswers(shuffle(answers));
     setShowAnswer(false);
-    console.log(answers);
   }, [question]);
 
   return (

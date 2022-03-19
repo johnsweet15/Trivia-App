@@ -11,7 +11,6 @@ import { getQuestions } from "../../requests/trivia";
 const Category: NextPage = () => {
   const router = useRouter();
   const query = router.query as { id: string; name: string };
-  console.log(query, router.query);
   const { id, name } = query;
 
   const [questions, setQuestions] = useState<Array<Question>>([]);
@@ -26,7 +25,7 @@ const Category: NextPage = () => {
     if (id) {
       getTriviaQuestions();
     }
-  }, [id, getTriviaQuestions]);
+  }, [id]);
 
   return (
     <div>
