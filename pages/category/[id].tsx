@@ -16,7 +16,7 @@ const Category: NextPage = () => {
   const [questions, setQuestions] = useState<Array<Question>>([]);
 
   const getTriviaQuestions = async () => {
-    const [response] = await getQuestions(id);
+    const [response] = await getQuestions(id, sessionStorage.getItem("token"));
     const questions = response?.data?.results || [];
     setQuestions(questions);
   };
