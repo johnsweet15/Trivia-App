@@ -12,21 +12,22 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (!sessionStorage.getItem("token")) {
-      getToken();
+      getTokenFromApi();
     }
     getTriviaCategories();
   }, []);
 
-  const getToken = async () => {
+  const getTokenFromApi = async () => {
     const [response] = await getSessionToken();
     const sessionToken = response?.data?.token || null;
     if (sessionToken) {
       sessionStorage.setItem("token", sessionToken);
+      window.location.reload();
     }
   };
 
   const getTriviaCategories = async () => {
-    const [response] = await getCategories(sessionStorage.getItem("token"));
+    const [response] = await getCategories();
     const categories = response?.data?.trivia_categories || [];
     categories.push({ id: "1", name: "All" });
     setCategories(categories);
@@ -45,6 +46,7 @@ const Home: NextPage = () => {
               pathname: `/category/${category.id}`,
               query: { name: category.name },
             }}
+            passHref
           >
             <Card elevation={1} padding={30} margin={10}>
               {category.name}
